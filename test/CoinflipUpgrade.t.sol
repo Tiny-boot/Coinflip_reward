@@ -7,8 +7,8 @@ import "../src/CoinflipV2.sol" as CoinflipV2;
 import {UUPSProxy} from "../src/Proxy.sol";
 
 contract CoinflipUpgradeTest is Test {
-    Coinflip public game;
-    CoinflipV2 public gameV2;
+    CoinflipV1.Coinflip public game;
+    CoinflipV2.CoinflipV2 public gameV2;
     UUPSProxy public proxy;
 
     Coinflip public wrappedV1;
