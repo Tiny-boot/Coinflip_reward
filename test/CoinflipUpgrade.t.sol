@@ -5,6 +5,7 @@ import {Test, console2} from "forge-std/Test.sol";
 import "../src/Coinflip.sol" as CoinflipV1;
 import "../src/CoinflipV2.sol" as CoinflipV2;
 import {UUPSProxy} from "../src/Proxy.sol";
+import {DauphineToken} from "../src/DauphineToken.sol";
 
 contract CoinflipUpgradeTest is Test {
     CoinflipV1.Coinflip public game;
