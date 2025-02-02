@@ -51,6 +51,4 @@ contract CoinflipUpgradeTest is Test {
         wrappedV2.seedRotation("1234567890", 5);
         assertEq(wrappedV2.seed(), "6789012345");
     }
-
 }
-

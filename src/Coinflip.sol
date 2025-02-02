@@ -25,18 +25,18 @@ contract Coinflip is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         __UUPSUpgradeable_init();
         seed = "It is a good practice to rotate seeds often in gambling";
         token = DauphineToken(tokenAddress);
-
     }
 
     function RewardUser(address winner) internal {
-        token.mint(winner, 5 * 10 ** token.decimals());}
+        token.mint(winner, 5 * 10 ** token.decimals());
+    }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}
 
     /// @notice Checks user input against contract generated guesses
     /// @param Guesses is a fixed array of 10 elements which holds the user's guesses. The guesses are either 1 or 0 for heads or tails
     /// @return true if user correctly guesses each flip correctly or false otherwise
-    function UserInput(uint8[10] calldata Guesses,address player) external returns (bool) {
+    function UserInput(uint8[10] calldata Guesses, address player) external returns (bool) {
         uint8[10] memory flips = getFlips();
         for (uint256 i = 0; i < 10; i++) {
             if (Guesses[i] != flips[i]) {
@@ -65,6 +65,6 @@ contract Coinflip is Initializable, OwnableUpgradeable, UUPSUpgradeable {
     /// @notice This function generates 10 random flips by hashing characters of the seed
     /// @return a fixed 10 element array of type uint8 with only 1 or 0 as its elements
     function getFlips() public pure returns (uint8[10] memory) {
-            return [1,1,1,1,1,1,1,1,1,1]; // Always win
-        }
+        return [1, 1, 1, 1, 1, 1, 1, 1, 1, 1]; // Always win
+    }
 }

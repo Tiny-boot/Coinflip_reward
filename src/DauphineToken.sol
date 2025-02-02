@@ -6,11 +6,7 @@ import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 
 contract DauphineToken is ERC20, Ownable {
-
-    constructor(address initialOwner)
-        ERC20("DauphineToken", "DAU")
-        Ownable(initialOwner)
-    {
+    constructor(address initialOwner) ERC20("DauphineToken", "DAU") Ownable(initialOwner) {
         _mint(msg.sender, 1000 * 10 ** decimals()); // Mint DAU to deployer
     }
 
