@@ -11,17 +11,17 @@ contract CoinflipUpgradeTest is Test {
     CoinflipV2.CoinflipV2 public gameV2;
     UUPSProxy public proxy;
 
-    Coinflip public wrappedV1;
-    CoinflipV2 public wrappedV2;
+    CoinflipV1.Coinflip public wrappedV1;
+    CoinflipV2.CoinflipV2 public wrappedV2;
 
     address owner = vm.addr(0x1);
 
     function setUp() public {
         vm.startPrank(owner);
-        game = new Coinflip();
-        gameV2 = new CoinflipV2();
+        game = new CoinflipV1.Coinflip();
+        gameV2 = new CoinflipV2.CoinflipV2();
         proxy = new UUPSProxy(address(game), abi.encodeWithSignature("initialize(address)", owner));
-        wrappedV1 = Coinflip(address(proxy));
+        wrappedV1 = CoinflipV1.Coinflip(address(proxy));
     }
 
     function test_V1InitialSeed() public {
@@ -46,7 +46,7 @@ contract CoinflipUpgradeTest is Test {
 
     function test_Rotation() public {
         wrappedV1.upgradeToAndCall(address(gameV2), "");
-        wrappedV2 = CoinflipV2(address(proxy));
+        wrappedV2 = CoinflipV2.CoinflipV2(address(proxy));
 
         wrappedV2.seedRotation("1234567890", 5);
         assertEq(wrappedV2.seed(), "6789012345");
