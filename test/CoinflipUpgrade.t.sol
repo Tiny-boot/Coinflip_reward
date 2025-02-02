@@ -25,8 +25,7 @@ contract CoinflipUpgradeTest is Test {
         game = new CoinflipV1.Coinflip();
         gameV2 = new CoinflipV2.CoinflipV2();
         proxy = new UUPSProxy(
-            address(game),
-            abi.encodeWithSignature("initialize(address,address)", owner, address(dauToken))
+            address(game), abi.encodeWithSignature("initialize(address,address)", owner, address(dauToken))
         );
         wrappedV1 = CoinflipV1.Coinflip(address(proxy));
     }
