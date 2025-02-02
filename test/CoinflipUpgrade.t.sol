@@ -13,8 +13,7 @@ contract CoinflipUpgradeTest is Test {
 
     CoinflipV1.Coinflip public wrappedV1;
     CoinflipV2.CoinflipV2 public wrappedV2;
-    DauphineToken public dauToken; 
-
+    DauphineToken public dauToken;
 
     address owner = vm.addr(0x1);
 
