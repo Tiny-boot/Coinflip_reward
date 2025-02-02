@@ -24,7 +24,10 @@ contract CoinflipUpgradeTest is Test {
         dauToken = new DauphineToken(owner);
         game = new CoinflipV1.Coinflip();
         gameV2 = new CoinflipV2.CoinflipV2();
-        proxy = new UUPSProxy(address(game), abi.encodeWithSignature("initialize(address)", owner));
+        proxy = new UUPSProxy(
+            address(game),
+            abi.encodeWithSignature("initialize(address,address)", owner, address(dauToken))
+        );
         wrappedV1 = CoinflipV1.Coinflip(address(proxy));
     }
 
@@ -44,7 +47,7 @@ contract CoinflipUpgradeTest is Test {
     }
 
     function test_V1Win() public {
-        assertEq(wrappedV1.UserInput([1, 0, 0, 0, 1, 1, 1, 1, 0, 1], player), true);
+        assertEq(wrappedV1.UserInput([1, 1, 1, 1, 1, 1, 1, 1, 1, 1], player), true);
     }
 
     function test_Rotation() public {
