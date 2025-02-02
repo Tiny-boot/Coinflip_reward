@@ -17,21 +17,22 @@ contract CoinflipUpgradeTest is Test {
     DauphineToken public dauToken;
 
     address owner = vm.addr(0x1);
+    address player = address(0x123);
 
     function setUp() public {
         vm.startPrank(owner);
+        dauToken = new DauphineToken(owner);
         game = new CoinflipV1.Coinflip();
         gameV2 = new CoinflipV2.CoinflipV2();
         proxy = new UUPSProxy(address(game), abi.encodeWithSignature("initialize(address)", owner));
         wrappedV1 = CoinflipV1.Coinflip(address(proxy));
     }
 
-    function test_V1InitialSeed() public {
+    function test_V1InitialSeed() public view  {
         assertEq(wrappedV1.seed(), "It is a good practice to rotate seeds often in gambling");
     }
 
     function test_UserGetsReward() public {
-        address player = address(0x123);
         uint8[10] memory correctGuesses = wrappedV1.getFlips();
         uint256 balanceBefore = dauToken.balanceOf(player);
 
