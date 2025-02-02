@@ -28,7 +28,7 @@ contract CoinflipUpgradeTest is Test {
         wrappedV1 = CoinflipV1.Coinflip(address(proxy));
     }
 
-    function test_V1InitialSeed() public view  {
+    function test_V1InitialSeed() public view {
         assertEq(wrappedV1.seed(), "It is a good practice to rotate seeds often in gambling");
     }
 
