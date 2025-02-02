@@ -13,7 +13,7 @@ error SeedTooShort();
 contract CoinflipV2 is Initializable, OwnableUpgradeable, UUPSUpgradeable {
     /// @custom:oz-upgrades-unsafe-allow constructor
     string public seed; //copied from the previous contract
-    DauphineToken public token;
+    DauphineToken public dauToken;
 
     constructor() {
         _disableInitializers();
@@ -23,11 +23,11 @@ contract CoinflipV2 is Initializable, OwnableUpgradeable, UUPSUpgradeable {
         __Ownable_init(initialOwner);
         __UUPSUpgradeable_init();
         seed = "It is a good practice to rotate seeds often in gambling";
-        token = DauphineToken(tokenAddress);
+        dauToken = DauphineToken(tokenAddress);
     }
 
     function RewardUser(address winner) internal {
-        token.mint(winner, 5 * 10 ** token.decimals());
+        dauToken.mint(winner, 5 * 10 ** dauToken.decimals());
     }
 
     function _authorizeUpgrade(address newImplementation) internal override onlyOwner {}

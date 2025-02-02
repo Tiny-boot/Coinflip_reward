@@ -31,13 +31,13 @@ contract CoinflipUpgradeTest is Test {
     function test_UserGetsReward() public {
         address player = address(0x123);
         uint8[10] memory correctGuesses = wrappedV1.getFlips();
-        uint256 balanceBefore = token.balanceOf(player);
+        uint256 balanceBefore = dauToken.balanceOf(player);
 
         bool result = wrappedV1.UserInput(correctGuesses, player);
-        uint256 balanceAfter = token.balanceOf(player);
+        uint256 balanceAfter = dauToken.balanceOf(player);
 
         assertEq(result, true, "User should win");
-        assertEq(balanceAfter, balanceBefore + 5 * 10 ** token.decimals(), "User should receive 5 DAU tokens");
+        assertEq(balanceAfter, balanceBefore + 5 * 10 ** dauToken.decimals(), "User should receive 5 DAU tokens");
     }
 
     function test_V1Win() public {
